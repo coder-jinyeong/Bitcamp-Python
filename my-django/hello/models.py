@@ -16,7 +16,6 @@ class Calculator(object):
         return self.num1 / self.num2
 
 if __name__ == '__main__':
-
     while 1:
         menu = input("0.Exit 1.계산기 (+, -, *, /) ")
         if menu == "0":
@@ -24,11 +23,17 @@ if __name__ == '__main__':
         elif menu == "1":
             num1 = int(input("첫번째 수 : "))
             num2 = int(input("두번째 수 : "))
-            # 객체생성
+            opcode = input("연산자 입력 : ")
+            res = ""
             calc = Calculator(num1,num2)
-            print("*"*30)
-            print(f'{calc.num1} + {calc.num2} = {calc.add()}')
-            print(f'{calc.num1} - {calc.num2} = {calc.sub()}')
-            print(f'{calc.num1} * {calc.num2} = {calc.mul()}')
-            print(f'{calc.num1} / {calc.num2} = {calc.div()}')
+            print("*" * 30)
+            if opcode == "+":
+                res = f'{calc.num1} + {calc.num2} = {calc.add()}'
+            elif opcode == "-":
+                res = f'{calc.num1} - {calc.num2} = {calc.sub()}'
+            elif opcode == "*":
+                res = f'{calc.num1} * {calc.num2} = {calc.mul()}'
+            elif opcode == "/":
+                res = f'{calc.num1} / {calc.num2} = {calc.div()}'
+            print(res)
             break;
