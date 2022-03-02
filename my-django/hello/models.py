@@ -31,9 +31,13 @@ def main():
             ch = Quiz07RandomChoice()
             print(f'803호에서 랜덤으로 추출한 사람 : {ch.choice()}')
         elif menu == "8":
-            break
+            rps = Quiz08Rps(int(input("1 : 주먹 2: 가위 3: 보자기 \n입력 : ")))
+            print(f'사용자 : {rps.user} \n컴퓨터 : {rps.com} \n결과 : {rps.res()}')
         else:
             print("잘못 입력하였습니다.")
+
+def myRandom(start, end):
+    return random.randint(start,end)
 
 class Quiz01Calculator:
     def __init__(self, num1, num2, opcode):
@@ -119,7 +123,7 @@ class Quiz04GradeAuto:
 class Quiz05Dice:
     @staticmethod
     def num():
-        return random.randint(1, 6)
+        return myRandom(1, 6)
 
 class Quiz06RandomGenerator:
     def __init__(self,num1,num2):
@@ -127,7 +131,7 @@ class Quiz06RandomGenerator:
         self.num2 = num2
 
     def rand(self):
-        return random.randint(self.num1,self.num2)
+        return myRandom(self.num1,self.num2)
 
 class Quiz07RandomChoice:
     def __init__(self): # 803호에서 랜덤으로 1명 이름 추출
@@ -137,12 +141,19 @@ class Quiz07RandomChoice:
                         '최민서', '한성수', '김윤섭', '김승현',
                         "강 민", "최건일", "유재혁", "김아름", "장원종"]
     def choice(self):
-        return self.members[random.randint(0, 23)]
+        return self.members[myRandom(0, 23)]
 
 class Quiz08Rps:
-    def __init__(self):
-        pass
-
+    def __init__(self,user):
+        self.user = user
+        self.com = myRandom(1,3)
+    def res(self):
+        '''res = "Draw" if (self.user == self.com) else "Win" if (self.user > (self.com + 1) % 3 + 1) else "Lose"'''
+        if self.user == 1 or 2:
+            res = "Draw" if (self.user == self.com) else "Win" if (self.user > (self.com + 1) % 3) else "Lose"
+        elif self.user == 3:
+            res = "Draw" if (self.user == self.com) else "Win" if (self.user > (self.com + 1) % 2) else "Lose"
+        return res
 class Quiz09GetPrime:
     def __init__(self):
         pass
