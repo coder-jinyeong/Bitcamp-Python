@@ -1,41 +1,4 @@
 import random
-
-def main():
-    while 1:
-        menu = input("0.Exit 1.계산기 2.BMI 3.성적표 4. 5.주사위 6.랜덤숫자 7.랜덤이름추출 "
-                     "8.Rps 9.GetPrime 10.LeapYear\n입력 : ")
-        if menu == "0":
-            break
-        elif menu == "1":
-            calc = Quiz01Calculator(int(input("첫번째 수 : ")),int(input("두번째 수 : ")),input("연산자 입력(+, -, *, /) : "))
-            print(calc.res())
-            break
-        elif menu == "2":
-            bmi = Quiz02Bmi(input("이름 : "), float(input("몸무게 입력 : ")),float(input("키(cm) 입력 : ")))
-            print(f'{bmi.name} 님의 BMI 지수 : {bmi.sum():.2f} \n{bmi.name} 님은 {bmi.res()} 입니다.')
-            break
-        elif menu == "3":
-            grade = Quiz03Grade(input("이름 : "), int(input("국어 점수 : ")), int(input("영어 점수 : ")),int(input("수학 점수 : ")))
-            print(f'이름 : {grade.name} \n국어 점수 : {grade.kor} \n영어 점수 : {grade.eng} \n수학 점수 : {grade.math} '
-                  f'\n종합점수 : {grade.sum()} \n평균 : {grade.avg()}')
-            break
-        elif menu == "4":
-            print()
-            break;
-        elif menu == "5":
-            print(f'주사위 나온 값 :  {Quiz05Dice.num()}')
-        elif menu == "6":
-            rd = Quiz06RandomGenerator(int(input("원하는 시작 범위 : ")),int(input("원하는 끝나는 범위 :" )))
-            print(f'{rd.num1} 부터 {rd.num2} 까지 중 나온 랜덤 숫자 : {rd.rand()}')
-        elif menu == "7":
-            ch = Quiz07RandomChoice()
-            print(f'803호에서 랜덤으로 추출한 사람 : {ch.choice()}')
-        elif menu == "8":
-            rps = Quiz08Rps(int(input("1 : 주먹 2: 가위 3: 보자기 \n입력 : ")))
-            print(f'사용자 : {rps.user} \n컴퓨터 : {rps.com} \n결과 : {rps.res()}')
-        else:
-            print("잘못 입력하였습니다.")
-
 def myRandom(start, end):
     return random.randint(start,end)
 
@@ -70,29 +33,19 @@ class Quiz01Calculator:
         return res
 
 class Quiz02Bmi:
-    def __init__(self,name, weight, height):
-        self.name = name
-        self.weight = weight
-        self.height = height
-
-    def meter(self):
-        return self.height / 100
-
-    def sum(self):
-        return self.weight / (Quiz02Bmi.meter(self) * Quiz02Bmi.meter(self))
-
-    def res(self):
-        if Quiz02Bmi.sum(self) < 18.5:
-            res = "저체중"
-        elif 18.5 <= Quiz02Bmi.sum(self) and Quiz02Bmi.sum(self) < 23:
-            res = "정상"
-        elif 23 <= Quiz02Bmi.sum(self) and Quiz02Bmi.sum(self) < 25:
-            res = "과체중"
-        elif 25 <= Quiz02Bmi.sum(self):
-            res = "비만"
+    @staticmethod
+    def getBmi(member):
+        this = member
+        bmires = this.weight / (this.height * this.height) * 10000
+        if bmires > 25:
+            return f'비만'
+        elif bmires > 23:
+            return f'과체중'
+        elif bmires > 18.5:
+            return f'정상'
         else:
-            res = "잘못입력하였습니다."
-        return res
+            return f'저체중'
+
 
 class Quiz03Grade:
     def __init__(self,name,kor,eng,math):
@@ -148,11 +101,12 @@ class Quiz08Rps:
         self.user = user
         self.com = myRandom(1,3)
     def res(self):
-        '''res = "Draw" if (self.user == self.com) else "Win" if (self.user > (self.com + 1) % 3 + 1) else "Lose"'''
-        if self.user == 1 or 2:
+        if self.user == 1:
+            res = "Draw" if (self.user == self.com) else "Win" if (self.user > (self.com + 1) % 3) else "Lose"
+        elif self.user == 2:
             res = "Draw" if (self.user == self.com) else "Win" if (self.user > (self.com + 1) % 3) else "Lose"
         elif self.user == 3:
-            res = "Draw" if (self.user == self.com) else "Win" if (self.user > (self.com + 1) % 2) else "Lose"
+            res = "Draw" if (self.user == self.com) else "Win" if (self.user > self.com + 1)else "Lose"
         return res
 class Quiz09GetPrime:
     def __init__(self):
@@ -178,6 +132,3 @@ class Quiz14Gugudan: # 책받침구구단
     def __init__(self):
         pass
 
-
-if __name__ == '__main__':
-    main()
