@@ -2,7 +2,7 @@ import random
 def myRandom(start, end):
     return random.randint(start,end)
 
-class Quiz01Calculator:
+class Quiz00Calculator:
     def __init__(self, num1, num2, opcode):
         self.num1 = num1
         self.num2 = num2
