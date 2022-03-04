@@ -46,7 +46,6 @@ class Quiz02Bmi:
         else:
             return f'저체중'
 
-
 class Quiz03Grade:
     def __init__(self,name,kor,eng,math):
         self.name = name
@@ -69,9 +68,23 @@ class Quiz04GradeAuto:
     def avg(self):
         return (self.kor + self.eng + self.math) / 3
     def getGrade(self):
-        pass
+        if self.avg() >= 90:
+            res = "A"
+        elif self.avg() >= 80:
+            res = "B"
+        elif self.avg() >= 70:
+            res = "C"
+        elif self.avg() >= 60:
+            res = "D"
+        else:
+            res = "F"
+        return res
     def chkPass(self):
-        pass
+        if self.getGrade() == "F":
+            res = "불합격"
+        else:
+            res = "합격"
+        return res
 
 class Quiz05Dice:
     @staticmethod
@@ -101,27 +114,58 @@ class Quiz08Rps:
         self.user = user
         self.com = myRandom(1,3)
     def res(self):
-        if self.user == 1:
-            res = "Draw" if (self.user == self.com) else "Win" if (self.user > (self.com + 1) % 3) else "Lose"
-        elif self.user == 2:
+        if self.user == 1 or self.user == 2:
             res = "Draw" if (self.user == self.com) else "Win" if (self.user > (self.com + 1) % 3) else "Lose"
         elif self.user == 3:
             res = "Draw" if (self.user == self.com) else "Win" if (self.user > self.com + 1)else "Lose"
         return res
+
 class Quiz09GetPrime:
-    def __init__(self):
-        pass
+    def __init__(self,num):
+        self.num = num
+
+    def res(self):
+        count = 0
+        res = ''
+        for i in range(2, self.num):
+            for j in range(1, i):
+                if i % j == 0:
+                    count += 1
+            if count == 1:
+                res += f'{i}\t'
+            count = 0
+        return res
 
 class Quiz10LeapYear:
-    def __init__(self):
-        pass
+    def __init__(self,year):
+        self.year = year
+
+    def result(self):
+        if self.year % 4 == 0 : res = f'윤년입니다.'
+        else: res = f'윤년이 아닙니다'
+        return res
 
 class Quiz11NumberGolf:
-    def __init__(self):
-        pass
+    @staticmethod
+    def result():
+        rand = myRandom(0,100)
+        while(1):
+            num = int(input("숫자 입력 : "))
+            if num == rand:
+                res = '맞췄습니다.'
+                return res
+            elif num < rand:
+                print(f'{num} 보다 더 큽니다.')
+
+            elif num > rand:
+                print(f'{num} 보다 더 작습니다')
+            else:
+                print('잘못 입력하였습니다.')
 
 class Quiz12Lotto:
-    def __init__(self):
+    def __init__(self, num):
+        self.num = num
+    def result(self):
         pass
 
 class Quiz13Bank: # 이름, 입금, 출금만 구현
