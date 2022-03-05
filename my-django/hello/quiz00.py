@@ -130,12 +130,22 @@ class Quiz00:
             res.append(li)
         print(li)
     def quiz08bank(self):  # 이름, 입금, 출금만 구현
-        namelist = memberlist()
-        name = namelist[myRandom(0,23)]
+        name = memberlist()[myRandom(0,23)]
         money = myRandom(1000, 100000)
-        plus = myRandom(1000, 100000)
-        minus = myRandom(1000, 100000)
-        print(f"이름 : {name} \n원금 : {money} \n입금할 금액 : {plus} 잔액 : {} \n"
-              f"출금할 금액 : {minus} 잔액 : {money - minus}")
+        while 1:
+            menu = int(input(f"{name}님의 현재 잔액 : {money} \n0.종료 1.입금 2.출금 \n입력 : "))
+            plus = myRandom(1000, 100000)
+            minus = myRandom(1000, 100000)
+            if menu == 0:
+                print('종료')
+                break
+            elif menu == 1:
+                money = money + plus
+                print(f'이름 : {name} 입금한 금액 : {plus} 잔액 : {money}')
+            elif menu == 2:
+                money = money - minus
+                if money < 0 :
+                    print("잔액보다 출금할 금액이 더 큽니다.")
+                print(f'이름 : {name} 출금한 금액 : {minus} 잔액 : {money}')
     def quiz09gugudan(self):  # 책받침구구단
-        pass
+        pss
