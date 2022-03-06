@@ -148,4 +148,11 @@ class Quiz00:
                     print("잔액보다 출금할 금액이 더 큽니다.")
                 print(f'이름 : {name} 출금한 금액 : {minus} 잔액 : {money}')
     def quiz09gugudan(self):  # 책받침구구단
-        pass
+        res = ''
+        for i in range(1, 10, 3):
+            for j in range(1, 10):
+                for k in range(i, (i + 3)):
+                    res += f'{k} * {j} = {k * j}\t'
+                res += '\n'
+            res += '\n'
+        print(res)
