@@ -1,4 +1,5 @@
 import random
+from shlex import join
 
 from domains import my100, myRandom, Member, memberlist
 
@@ -69,11 +70,9 @@ class Quiz00:
                 if (user > com + 1) else f"유저 : {rps[user-1]}, 컴퓨터 : {rps[com-1]} 결과 : Lose"
         print(res)
     def quiz04leap(self):
-        year = myRandom(0, 10001)
-        if year % 4 == 0:
-            res = f'{year}은 윤년입니다.'
-        else:
-            res = f'{year}은 윤년이 아닙니다'
+        year = myRandom(2000, 2022)
+        res = f'{year}년은 윤년입니다.' if(year % 4 == 0 and year % 100 != 0 or year % 400 == 0) else f'{year}년은 평년입니다.'
+
         print(res)
 
     def quiz05grade(self):
@@ -107,18 +106,16 @@ class Quiz00:
         return res
 
     def passChk(self, grade):
-        if grade == "F":
-            res = "불합격"
-        else:
-            res = "합격"
+        res = '불합격' if grade == 'F' else '합격'
         return res
 
-    def quiz06memberChoice(self):
+    def quiz06memberChoice():
         members = ['홍정명', '노홍주', '전종현', '정경준', '양정오',
                    "권혜민", "서성민", "조현국", "김한슬", "김진영",
                    '심민혜', '권솔이', '김지혜', '하진희', '최은아',
                    '최민서', '한성수', '김윤섭', '김승현',
                    "강 민", "최건일", "유재혁", "김아름", "장원종"]
+        print(members[myRandom(0, 23)])
         return members[myRandom(0, 23)]
 
     def quiz07lotto(self):
@@ -128,25 +125,9 @@ class Quiz00:
             li = random.sample(range(1,46), 6)
             li.sort()
             res.append(li)
-        print(li)
+        print(res)
     def quiz08bank(self):  # 이름, 입금, 출금만 구현
-        name = memberlist()[myRandom(0,23)]
-        money = myRandom(1000, 100000)
-        while 1:
-            menu = int(input(f"{name}님의 현재 잔액 : {money} \n0.종료 1.입금 2.출금 \n입력 : "))
-            plus = myRandom(1000, 100000)
-            minus = myRandom(1000, 100000)
-            if menu == 0:
-                print('종료')
-                break
-            elif menu == 1:
-                money = money + plus
-                print(f'이름 : {name} 입금한 금액 : {plus} 잔액 : {money}')
-            elif menu == 2:
-                money = money - minus
-                if money < 0 :
-                    print("잔액보다 출금할 금액이 더 큽니다.")
-                print(f'이름 : {name} 출금한 금액 : {minus} 잔액 : {money}')
+        Account.main(self)
     def quiz09gugudan(self):  # 책받침구구단
         res = ''
         for i in range(1, 10, 3):
@@ -156,3 +137,55 @@ class Quiz00:
                 res += '\n'
             res += '\n'
         print(res)
+
+class Account(object):
+    def __init__(self, name, account_number, money):
+        self.BANK_NAME = '비트은행'
+        self.name = memberlist()[myRandom(0,23)] if name == None else name
+        #self.name = Quiz00.quiz06memberChoice(self)
+        #num = myRandom(10000000, 99999999)
+        #self.account_number = f'{str(myRandom(0,99)).rjust(3,"0")} - {(int)(num / 1000000)} - {myRandom(100000,999999)}'
+        self.account_number = self.creat_account_number() if account_number == None else account_number
+        self.money = myRandom(100, 999) if money == None else money
+    def to_string(self):
+        return f'은행 : {self.BANK_NAME} ,\n' \
+               f'입금자 : {self.name},\n' \
+               f'계좌번호 : {self.account_number},\n' \
+               f'금액 : {self.money}\n'
+
+    def creat_account_number(self):
+        return "".join([str(myRandom(0,9)) if i != 3 and i != 6 else '-' for i in range(0, 13)])
+
+    def def_account(self, ls, account_number):
+        for i , j in enumerate(ls):
+            if j.account_number == account_number:
+                del ls[i]
+    @staticmethod
+    def main():
+        ls = []
+        while 1:
+            menu = input('0.종료 1.계좌개설 2.계좌내용 3.입금 4.출금 5.계좌해지\n입력 : ')
+            if menu == '0':
+                break
+            elif menu == '1':
+                acc = Account()
+                print(f'{acc.to_string()} ... 개설 되었습니다.\n')
+                ls.append(acc)
+            elif menu == '2':
+                #for i in range(len(ls)):
+                #   print(ls[i])
+                a = ''.join(i.to_string() for i in ls)
+                print(a)
+            elif menu == '3':
+                account_number = input('입금할 계좌번호 : ')
+                deposit = input('입금액')
+
+            elif menu == '4':
+                account_number = input('출금할 계좌번호 : ')
+                money = input('출금액')
+
+            elif menu == '5':
+                account_number = input('탈퇴할 계좌번호 : ')
+
+            else:
+                print('Wrong Number.. TryAgain')

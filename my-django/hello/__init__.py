@@ -4,12 +4,14 @@ from quiz10 import Quiz10
 from quiz20 import Quiz20
 from quiz30 import Quiz30
 from quiz40 import Quiz40
+from quiz00 import Account
 if __name__ == '__main__':
     q0 = Quiz00()
     q1 = Quiz10()
     q2 = Quiz20()
     q3 = Quiz30()
     q4 = Quiz40()
+
     while 1:
 
         menu = input('00계산기 01Bmi 02주사위 03가위바위보 04윤년 \n'
@@ -71,4 +73,5 @@ if __name__ == '__main__':
         elif menu == '47': q4.quiz47()
         elif menu == '48': q4.quiz48()
         elif menu == '49': q4.quiz49()
+        elif menu == '50': print(Account().to_string())
         else: break

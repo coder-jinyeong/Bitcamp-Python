@@ -175,4 +175,3 @@ class Quiz13Bank: # 이름, 입금, 출금만 구현
 class Quiz14Gugudan: # 책받침구구단
     def __init__(self):
         pass
-
