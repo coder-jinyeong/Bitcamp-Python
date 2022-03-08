@@ -1,4 +1,8 @@
 import random
+import urllib
+
+from bs4 import BeautifulSoup
+from urllib.request import urlopen
 
 
 class Quiz20:
@@ -25,9 +29,9 @@ class Quiz20:
         list4[-2:] = []
         print(list4)
 
-        a = [1,2]
-        b = [0,5]
-        c = [a,b]
+        a = [1, 2]
+        b = [0, 5]
+        c = [a, b]
         print(c)
         print(c[0][1])
 
@@ -39,7 +43,7 @@ class Quiz20:
 
         print(sum(a))
 
-        b = [2, 10, 0 -2]
+        b = [2, 10, 0 - 2]
         print(sorted(b))
 
         print(b.index(0), len(b))
@@ -49,7 +53,7 @@ class Quiz20:
         print(a, type(a))
 
     def quiz22dict(self) -> str:
-        a = {"class":['deep learning', 'machine learning'], "num_students":[40,20]}
+        a = {"class": ['deep learning', 'machine learning'], "num_students": [40, 20]}
         print(a)
         print(type(a))
         print(a["class"])
@@ -74,13 +78,28 @@ class Quiz20:
 
         return None
 
-    def quiz24zip(self) -> str: return None
+    def quiz24zip(self) -> str:
+        url = 'https://music.bugs.co.kr/chart/track/realtime/total'
+        html_doc = urlopen(url)
+        soup = BeautifulSoup(html_doc, 'html.parser')
+        artists = soup.find_all('p', {'class': 'artist'})
+        artists = [i.get_text() for i in artists]
+        print(''.join(i for i in artists))
+        return None
 
     def quiz25dictcom(self) -> str: return None
 
     def quiz26map(self) -> str: return None
 
-    def quiz27(self) -> str: return None
+    def quiz27melon(self) -> str:
+        headers = {'User-Agent': 'Mozilla/5.0' }
+        url = 'https://www.melon.com/chart/index.htm?dayTime=2022030815'
+        req = urllib.request.Request(url, headers= headers)
+        soup = BeautifulSoup(urlopen(req).read(), 'lxml')
+        artists = soup.find_all('div', {'class': 'ellipsis rank01'})
+        artists = [i.get_text() for i in artists]
+        print(''.join(i for i in artists))
+        return None
 
     def quiz28(self) -> str: return None
 

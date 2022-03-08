@@ -18,7 +18,7 @@ if __name__ == '__main__':
                      '05성적표 06멤버선택 07로또 08입출금 09구구단 \n'
                      '10버블 11삽입 12선택 13퀵 14병합 \n'
                      '15매직 16지그재그 17소수 18골프 19예약\n'
-                     '20리스트 21튜플 22딕셔너리 23 24 \n'
+                     '20리스트 21튜플 22딕셔너리 23 24zip \n'
                      '25 26 27 28 29 \n'
                      '30 31 32 33 34 \n'
                      '35 36 37 38 39\n' 
@@ -50,7 +50,7 @@ if __name__ == '__main__':
         elif menu == '24': q2.quiz24zip()
         elif menu == '25': q2.quiz25dictcom()
         elif menu == '26': q2.quiz26map()
-        elif menu == '27': q2.quiz27()
+        elif menu == '27': q2.quiz27melon()
         elif menu == '28': q2.quiz28()
         elif menu == '29': q2.quiz29()
         elif menu == '30': q3.quiz30()
