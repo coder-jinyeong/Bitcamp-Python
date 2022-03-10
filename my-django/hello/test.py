@@ -2,4 +2,5 @@ import random
 import domains
 
 if __name__ == '__main__':
-    print()
+    for i in range(0,10):
+        print(i)
