@@ -84,8 +84,8 @@ class Quiz20:
         html_doc = urlopen(url)
         soup = BeautifulSoup(html_doc, 'html.parser')
         #self.find_rank(soup)
-        ls1 = self.find_music(soup, 'title')
-        ls2 = self.find_music(soup, 'artist')
+        ls1 = self.find_music(soup, 'p', 'class', 'title')
+        ls2 = self.find_music(soup, 'p', 'class', 'artist')
         #self.dict2(ls1,ls2)
         dict = {}
         for i, j in zip(ls1, ls2):
@@ -109,9 +109,7 @@ class Quiz20:
     @staticmethod
     def print_music_list(soup):
         artists = soup.find_all('p', {'class': 'artist'})
-        # print(type(artists)) # <class 'bs4.element.ResultSet'>
         artists = [i.get_text() for i in artists]
-        # print(type(artists))
         print(''.join(i for i in artists))
         titles = soup.find_all('p', {'class': 'title'})
         titles = [i.get_text() for i in titles]
@@ -119,28 +117,31 @@ class Quiz20:
 
     def find_rank(self,soup):
         topic = ['artist', 'title']
-        for i,j in enumerate(self.find_music(soup, topic)):
+        for i,j in enumerate(self.find_music( soup, 'p', 'class', topic)):
             print(f'{i} 위 : {j}')
 
     @staticmethod
-    def find_music(soup, name) -> []:
-        ls = soup.find_all('p', {'class': name})
-        return [i.get_text() for i in ls]
+    def find_music(soup, tag, tp, name) -> []:
+        ls = soup.find_all(tag, {tp : name})
+        return [i.get_text().strip() for i in ls]
 
 
     def quiz25dictcom(self) -> str: return None
 
     def quiz26map(self) -> str: return None
 
-    def quiz27melon(self) -> str:
+    def quiz27melon(self) -> []:
         headers = {'User-Agent': 'Mozilla/5.0' }
         url = 'https://www.melon.com/chart/index.htm?dayTime=2022030815'
         req = urllib.request.Request(url, headers= headers)
         soup = BeautifulSoup(urlopen(req).read(), 'lxml')
-        artists = soup.find_all('div', {'class': 'ellipsis rank01'})
-        artists = [i.get_text() for i in artists]
-        print(''.join(i for i in artists))
-        return None
+        ls1 = self.find_music(soup,'div', 'class', 'ellipsis rank01')
+        ls2 = self.find_music(soup,'span', 'class', 'checkEllipsis')
+        dict = {}
+
+        for i, j in zip(ls1, ls2):
+            dict[i] = j
+        return dict
 
     def quiz28dataframe(self) -> None:
         dict = self.quiz24zip()
