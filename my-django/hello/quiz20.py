@@ -82,10 +82,24 @@ class Quiz20:
         url = 'https://music.bugs.co.kr/chart/track/realtime/total'
         html_doc = urlopen(url)
         soup = BeautifulSoup(html_doc, 'html.parser')
+        '''
         artists = soup.find_all('p', {'class': 'artist'})
         artists = [i.get_text() for i in artists]
-        print(''.join(i for i in artists))
-        return None
+        #print(''.join(i for i in artists))
+        title = soup.find_all('p', {'class': 'title'})
+        title = [i.get_text() for i in title]
+        print(''.join((i for i in title)))
+        '''
+        topic = ['artist', 'title']
+        res = [self.bugs(soup, i) for i in topic]
+        # res = [self.bugs(soup, j) for i,j in enumerate(topic)]
+        print(res)
+    @staticmethod
+    def bugs(soup,name):
+        names = soup.find_all('p', {'class': name})
+        names = [i.get_text() for i in names]
+        print('\n'.join((i for i in names)))
+
 
     def quiz25dictcom(self) -> str: return None
 
