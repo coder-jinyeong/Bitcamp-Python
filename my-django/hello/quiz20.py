@@ -1,7 +1,7 @@
-import random
 import urllib
 import pandas as pd
-
+import domains
+from quiz00 import Quiz00
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
 
@@ -87,11 +87,12 @@ class Quiz20:
         ls1 = self.find_music(soup, 'p', 'class', 'title')
         ls2 = self.find_music(soup, 'p', 'class', 'artist')
         #self.dict2(ls1,ls2)
-        dict = {}
-        for i, j in zip(ls1, ls2):
-            dict[i] = j
         #print(dict)
-        return dict
+        l = [i + j for i,j in zip(ls1, ls2)]
+        l2 = list(zip(ls1,ls2))
+        d = {i:j for i,j in zip(ls1, ls2)}
+        d1 = dict(zip(ls1,ls2))
+        return d
     @staticmethod
     def dict1(ls1,ls2) -> None:
         dict = {}
@@ -104,6 +105,13 @@ class Quiz20:
         dict = {}
         for i, j in enumerate(ls1):
             dict[j] = ls2[i]
+        print(dict)
+
+    @staticmethod
+    def dict3(ls1,ls2) -> None:
+        dict = {}
+        for i, j in zip(ls1, ls2):
+            dict[i] = j
         print(dict)
 
     @staticmethod
@@ -125,8 +133,20 @@ class Quiz20:
         ls = soup.find_all(tag, {tp : name})
         return [i.get_text().strip() for i in ls]
 
-
-    def quiz25dictcom(self) -> str: return None
+    @staticmethod
+    def quiz25dictcom() -> None:
+        students = []
+        scores = []
+        [scores.append(domains.myRandom(0, 100)) for i in range(5)]
+        while(1):
+            students = set(students)
+            students.add(Quiz00.quiz06memberChoice())
+            if len(students) == 5:break
+        d = dict(zip(students,scores))
+        df = pd.DataFrame.from_dict(d, orient = 'index')
+        print(d)
+        print(df)
+        return None
 
     def quiz26map(self) -> str: return None
 
