@@ -19,11 +19,11 @@ if __name__ == '__main__':
                      '10버블 11삽입 12선택 13퀵 14병합 \n'
                      '15매직 16지그재그 17소수 18골프 19예약\n'
                      '20리스트 21튜플 22딕셔너리 23 24zip \n'
-                     '25 26 27 28 29 \n'
-                     '30 31 32 33 34 \n'
+                     '25dictcom 26map 27melon 28dataframe 29pandas_df \n'
+                     '30df_4_by_3 31 32 33 34 \n'
                      '35 36 37 38 39\n' 
                      '입력 : ')
-        if menu == '00': q0.quiz00calculator()
+        if menu == '00':q0.quiz00calculator()
         elif menu == '01': q0.quiz01bmi()
         elif menu == '02': q0.quiz02dice()
         elif menu == '03': q0.quiz03rps()
@@ -52,10 +52,10 @@ if __name__ == '__main__':
         elif menu == '26': q2.quiz26map()
         elif menu == '27': q2.quiz27melon()
         elif menu == '28': q2.quiz28dataframe()
-        elif menu == '29': q2.quiz29()
-        elif menu == '30': q3.quiz30()
-        elif menu == '31': q3.quiz31()
-        elif menu == '32': q3.quiz32()
+        elif menu == '29': q2.quiz29_pandas_df()
+        elif menu == '30': q3.quiz30_df_4_by_3()
+        elif menu == '31': q3.quiz31_rand_2_by_3()
+        elif menu == '32': q3.quiz32_df_grade()
         elif menu == '33': q3.quiz33()
         elif menu == '34': q3.quiz34()
         elif menu == '35': q3.quiz35()
@@ -73,5 +73,5 @@ if __name__ == '__main__':
         elif menu == '47': q4.quiz47()
         elif menu == '48': q4.quiz48()
         elif menu == '49': q4.quiz49()
-        elif menu == '50': print(Account().to_string())
+        elif menu == '50': print(Account.to_string())
         else: break

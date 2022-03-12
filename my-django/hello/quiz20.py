@@ -144,7 +144,7 @@ class Quiz20:
             if len(students) == 5:break
         d = dict(zip(students,scores))
         df = pd.DataFrame.from_dict(d, orient = 'index')
-        print(d)
+        print(type(d))
         print(df)
         return None
 
@@ -169,4 +169,12 @@ class Quiz20:
         print(df)
         df.to_csv('./save/bugs.csv', sep = ',' , na_rep = 'NaN')
 
-    def quiz29(self) -> str: return None
+    def quiz29_pandas_df(self) -> None:
+        num1 = []
+        num2 = []
+        col = [chr(i) for i in range(97,100)]
+        [num2.append(i) if i % 2 == 0 else num1.append(i) for i in range(1,7)]
+        d1 = {"1": num1, "2": num2}
+        df = pd.DataFrame.from_dict(d1, orient = 'index', columns = col)
+        print(df)
+        return None
