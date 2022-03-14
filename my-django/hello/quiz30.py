@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 from icecream import ic
 from domains import myRandom, my100
 class Quiz30:
@@ -12,11 +13,15 @@ class Quiz30:
 
     @staticmethod
     def quiz31_rand_2_by_3() -> None:
+        '''
         arr = []
-        rand = myRandom(10,100)
-        [arr.append([rand, rand, rand]) for i in range(2)]
+        rand = myRandom(10, 100)
+        [arr.append([myRandom(10, 100) for i in range(3)]) for i in range(2)]
         df = pd.DataFrame(arr, index=range(0, 2), columns=range(0, 3))
-        ic(df)
+        print(df)
+        '''
+        df = pd.DataFrame(np.random.randint(10, 100, size=(2,3)))
+        print(df)
         return None
     '''
         데이터프레임 문제 Q03.
@@ -33,7 +38,7 @@ class Quiz30:
         subscore = []
         for i in range(10):
             [subscore.append(my100()) for i in range(4)]
-            score.append(subscore)
+            score.append([subscore])
 
         for i in range(10):
             name = ''
@@ -44,7 +49,9 @@ class Quiz30:
                     nameList.append(name)
                     break
         df = pd.DataFrame(score, index=nameList, columns=sub)
-        ic(df)
+        #ic(df)
+        print(score)
+
         return None
     '''
                 데이터프레임 문제 Q04.
@@ -62,7 +69,7 @@ class Quiz30:
                             QDBCw  44  32   8  29
                             PZOTP  94  78  79  96
                             GOJKU  62  17  75  49
-        '''
+    '''
     def quiz33(self) -> str: return None
 
     def quiz34(self) -> str: return None
