@@ -1,5 +1,5 @@
-from models import Model
-from domains import Dataset
+from context.models import Model
+from context.domains import Dataset
 
 class View:
     model = Model()

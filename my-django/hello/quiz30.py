@@ -1,7 +1,9 @@
 import pandas as pd
 import numpy as np
 from icecream import ic
-from domains import myRandom, my100
+from domains import myRandom, my100, memberlist
+from context.domains import Dataset
+
 class Quiz30:
     @staticmethod
     def quiz30_df_4_by_3() -> None:
@@ -15,12 +17,12 @@ class Quiz30:
     def quiz31_rand_2_by_3() -> None:
         '''
         arr = []
-        rand = myRandom(10, 100)
         [arr.append([myRandom(10, 100) for i in range(3)]) for i in range(2)]
         df = pd.DataFrame(arr, index=range(0, 2), columns=range(0, 3))
         print(df)
         '''
-        df = pd.DataFrame(np.random.randint(10, 100, size=(2,3)))
+        #numpy 사용 예제
+        df = pd.DataFrame(np.random.randint(10, 100, size=(2, 3)))
         print(df)
         return None
     '''
@@ -35,11 +37,7 @@ class Quiz30:
         score = []
         nameList = []
         sub = ['국어', '영어', '수학', '사회']
-        subscore = []
-        for i in range(10):
-            [subscore.append(my100()) for i in range(4)]
-            score.append([subscore])
-
+        score = [score.append([my100() for i in range(4)]) for i in range(10)]
         for i in range(10):
             name = ''
             while 1:
@@ -49,8 +47,8 @@ class Quiz30:
                     nameList.append(name)
                     break
         df = pd.DataFrame(score, index=nameList, columns=sub)
-        #ic(df)
-        print(score)
+
+        print(df)
 
         return None
     '''
@@ -70,7 +68,29 @@ class Quiz30:
                             PZOTP  94  78  79  96
                             GOJKU  62  17  75  49
     '''
-    def quiz33(self) -> str: return None
+
+    def quiz33_df_loc(self) -> str:
+        df = self.createDf(keys=['a','b','c','d'],
+                           vals=np.random.randint(0,100,4),
+                           len=3)
+        # ic(df)
+        # https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.loc.html
+        # grade.csv
+
+
+    def quiz33_df_loc(self) -> str:
+        df = self.createDf(keys=['a','b','c','d'],
+                           vals=np.random.randint(0,100,4),
+                           len=3)
+        # ic(df)
+        # https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.loc.html
+        # grade.csv
+
+        return None
+
+    @staticmethod
+    def createDf(keys, vals, len):
+        return pd.DataFrame([dict(zip(keys, vals)) for _ in range(len)])
 
     def quiz34(self) -> str: return None
 
